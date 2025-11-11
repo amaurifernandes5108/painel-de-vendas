@@ -40,6 +40,28 @@ body {
     font-weight: 300;
 }
 
+/* 2.5 TAGLINE COM GRADIENTE PREMIUM */
+.header-tagline {
+    text-align: center;
+    font-size: 1.15em;
+    font-weight: 600;
+    margin-top: 15px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.header-tagline p {
+    background: linear-gradient(135deg, #FFD700 0%, #667eea 50%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+}
+
 /* 3. CATÁLOGO PRINCIPAL */
 .catalog-container {
     max-width: 700px;
@@ -63,6 +85,90 @@ body {
 .ebook-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* PREMIUM CARD */
+.premium-card {
+    border: 3px solid #FFD700 !important;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 165, 0, 0.05) 100%) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.premium-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(20px, 20px);
+    }
+}
+
+.premium-badge {
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5) !important;
+}
+
+.premium-label {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.85em;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.premium-card h2 {
+    color: #FFD700 !important;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.premium-card h3 {
+    color: #FFA500;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.premium-features {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #FFD700;
+}
+
+.premium-price {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.premium-button {
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.premium-button:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5) !important;
+}
+
+.premium-footer {
+    font-style: italic;
 }
 
 /* CAPA DO E-BOOK */
@@ -104,6 +210,20 @@ body {
     color: #666;
 }
 
+/* FEATURES */
+.ebook-features {
+    font-size: 0.9em;
+    color: #555;
+    margin: 10px 0;
+    line-height: 1.8;
+}
+
+/* PREÇO */
+.ebook-price {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
 /* BOTÃO DE ACESSO */
 .access-button {
     display: inline-block;
@@ -139,6 +259,16 @@ body {
     color: #999;
     background-color: rgba(255, 255, 255, 0.5);
     margin-top: 40px;
+}
+
+.app-footer a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.app-footer a:hover {
+    text-decoration: underline;
 }
 
 /* 6. BOTÃO WHATSAPP FLUTUANTE */
@@ -207,6 +337,17 @@ body {
     }
 }
 
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -231,6 +372,14 @@ body {
 @media (max-width: 768px) {
     .app-header h1 {
         font-size: 1.8em;
+    }
+
+    .header-tagline {
+        font-size: 1em;
+    }
+
+    .header-tagline p {
+        letter-spacing: 0.2px;
     }
 
     .ebook-item {
@@ -276,6 +425,15 @@ body {
 
     .app-header p {
         font-size: 0.9em;
+    }
+
+    .header-tagline {
+        font-size: 0.95em;
+        margin-top: 12px;
+    }
+
+    .header-tagline p {
+        font-size: 0.95em;
     }
 
     .catalog-container {
@@ -352,5 +510,13 @@ body {
     .app-footer {
         border-top-color: #444;
         color: #888;
+    }
+
+    .header-tagline p {
+        -webkit-text-fill-color: transparent;
+    }
+
+    .premium-card {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.03) 0%, rgba(255, 165, 0, 0.03) 100%) !important;
     }
 }
