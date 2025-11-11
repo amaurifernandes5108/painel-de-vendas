@@ -1,5 +1,5 @@
-const ADMIN_USER = "amauri";
-const ADMIN_PASSWORD = "123456";
+const ADMIN_USER = "amauri fernandes";
+const ADMIN_PASSWORD = "Adc26280403";
 
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
