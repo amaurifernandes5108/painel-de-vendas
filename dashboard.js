@@ -1,33 +1,53 @@
 // ========================================
-// DASHBOARD ADMINISTRATIVO - JAVASCRIPT
+// DASHBOARD ADMIN - FUNCIONALIDADES COMPLETAS
 // ========================================
 
-let chartInstances = {};
+// DADOS INICIAIS
+let ebooks = [
+    { id: 1, titulo: "O Livro da Fé", descricao: "Teologia & Espiritualidade", preco: 49.90, vendas: 145, rating: 4.8 },
+    { id: 2, titulo: "Teologia Digital", descricao: "Para Criadores de Conteúdo", preco: 59.90, vendas: 89, rating: 4.9 },
+    { id: 3, titulo: "Espiritualidade Prática", descricao: "Vida Espiritual Profunda", preco: 54.90, vendas: 104, rating: 4.7 },
+    { id: 4, titulo: "Planilha Financeira", descricao: "Controle Financeiro", preco: 0, vendas: 56, rating: 4.9 },
+    { id: 5, titulo: "Mentor Milionário", descricao: "Mapa da Prosperidade", preco: 0, vendas: 23, rating: 5.0 }
+];
 
-// ================= INICIALIZAÇÃO =================
+let clientes = [
+    { id: 1, nome: "João Silva", email: "joao@email.com", whatsapp: "+55 24 99999-1111", compras: 3, total: 149.70, data: "15/10/2025" },
+    { id: 2, nome: "Maria Santos", email: "maria@email.com", whatsapp: "+55 24 99999-2222", compras: 1, total: 59.90, data: "20/10/2025" },
+    { id: 3, nome: "Pedro Costa", email: "pedro@email.com", whatsapp: "+55 24 99999-3333", compras: 2, total: 104.80, data: "22/10/2025" }
+];
+
+let vendas = [
+    { id: 1, cliente: "João Silva", ebook: "O Livro da Fé", valor: 49.90, data: "11/11/2025", status: "Pago" },
+    { id: 2, cliente: "Maria Santos", ebook: "Teologia Digital", valor: 59.90, data: "11/11/2025", status: "Pago" },
+    { id: 3, cliente: "Pedro Costa", ebook: "Espiritualidade Prática", valor: 54.90, data: "10/11/2025", status: "Pendente" }
+];
+
+// ========================================
+// INICIALIZAÇÃO
+// ========================================
+
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Dashboard carregado com sucesso!');
+    console.log('📊 Dashboard carregado!');
     
-    // Inicializar navegação
-    setupNavigation();
+    setupMenuNavigation();
+    setupThemeToggle();
+    setupMenuToggle();
+    initializeCharts();
+    renderEbooksGrid();
+    renderVendasTable();
+    renderClientesTable();
     
-    // Inicializar gráficos
-    initCharts();
-    
-    // Inicializar tema
-    setupTheme();
-    
-    // Inicializar menu responsivo
-    setupResponsiveMenu();
-    
-    // Carregar dados
-    loadDashboardData();
+    // Carregar dados do localStorage
+    loadFromLocalStorage();
 });
 
-// ================= NAVEGAÇÃO =================
-function setupNavigation() {
+// ========================================
+// MENU NAVIGATION
+// ========================================
+
+function setupMenuNavigation() {
     const menuItems = document.querySelectorAll('.menu-item');
-    const sections = document.querySelectorAll('.section');
     
     menuItems.forEach(item => {
         item.addEventListener('click', function(e) {
@@ -35,295 +55,30 @@ function setupNavigation() {
             
             // Remove active de todos
             menuItems.forEach(m => m.classList.remove('active'));
-            sections.forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             
             // Adiciona active ao clicado
             this.classList.add('active');
-            const sectionId = this.dataset.section + '-content';
-            document.getElementById(sectionId).classList.add('active');
+            const section = this.getAttribute('data-section');
+            const sectionContent = document.getElementById(section + '-content');
             
-            // Atualiza título
-            updatePageTitle(this.querySelector('.label').textContent);
-            
-            // Recria gráficos se necessário
-            setTimeout(() => {
-                Object.values(chartInstances).forEach(chart => {
-                    if (chart && typeof chart.resize === 'function') {
-                        chart.resize();
-                    }
-                });
-            }, 100);
-            
-            // Fecha menu em mobile
-            const sidebar = document.querySelector('.sidebar');
-            if (window.innerWidth <= 768) {
-                sidebar.classList.remove('active');
+            if (sectionContent) {
+                sectionContent.classList.add('active');
+                document.getElementById('page-title').textContent = this.textContent.trim();
             }
         });
     });
 }
 
-function updatePageTitle(title) {
-    const pageTitle = document.getElementById('page-title');
-    const icons = {
-        'Dashboard': '📊',
-        'E-books': '📚',
-        'Vendas': '💰',
-        'Clientes': '👥',
-        'Analytics': '📈',
-        'Configurações': '⚙️'
-    };
-    pageTitle.textContent = (icons[title] || '') + ' ' + title;
-}
+// ========================================
+// THEME TOGGLE
+// ========================================
 
-// ================= GRÁFICOS =================
-function initCharts() {
-    // Gráfico 1: Receita por Mês
-    createChartReceita();
-    
-    // Gráfico 2: E-books Mais Vendidos
-    createChartEbooks();
-    
-    // Gráfico 3: Origem dos Clientes
-    createChartOrigem();
-    
-    // Gráfico 4: Acessos por Dispositivo
-    createChartDispositivos();
-    
-    // Gráfico 5: Conversão por Semana
-    createChartConversao();
-}
-
-function createChartReceita() {
-    const ctx = document.getElementById('chartReceita').getContext('2d');
-    chartInstances.receita = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov'],
-            datasets: [{
-                label: 'Receita (R$)',
-                data: [1200, 1900, 3200, 2800, 3900, 4200, 3800, 4500, 5200, 4800, 6200],
-                borderColor: '#007bff',
-                backgroundColor: 'rgba(0, 123, 255, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.4,
-                pointRadius: 5,
-                pointBackgroundColor: '#007bff',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2,
-                pointHoverRadius: 7
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-dark').trim(),
-                        font: {
-                            size: 12,
-                            weight: '600'
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-light').trim()
-                    },
-                    grid: {
-                        color: 'rgba(0,0,0,0.05)'
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-light').trim()
-                    },
-                    grid: {
-                        display: false
-                    }
-                }
-            }
-        }
-    });
-}
-
-function createChartEbooks() {
-    const ctx = document.getElementById('chartEbooks').getContext('2d');
-    chartInstances.ebooks = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['O Livro da Fé', 'Teologia Digital', 'Espiritualidade Prática'],
-            datasets: [{
-                data: [145, 89, 104],
-                backgroundColor: [
-                    'rgba(0, 123, 255, 0.8)',
-                    'rgba(40, 167, 69, 0.8)',
-                    'rgba(220, 53, 69, 0.8)'
-                ],
-                borderColor: [
-                    '#007bff',
-                    '#28a745',
-                    '#dc3545'
-                ],
-                borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-dark').trim(),
-                        font: {
-                            size: 12,
-                            weight: '600'
-                        },
-                        padding: 15
-                    }
-                }
-            }
-        }
-    });
-}
-
-function createChartOrigem() {
-    const ctx = document.getElementById('chartOrigem').getContext('2d');
-    chartInstances.origem = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Instagram', 'WhatsApp', 'Email', 'Direto', 'Outros'],
-            datasets: [{
-                data: [35, 25, 20, 15, 5],
-                backgroundColor: [
-                    'rgba(255, 107, 107, 0.8)',
-                    'rgba(76, 175, 80, 0.8)',
-                    'rgba(33, 150, 243, 0.8)',
-                    'rgba(156, 39, 176, 0.8)',
-                    'rgba(255, 193, 7, 0.8)'
-                ]
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'right',
-                    labels: {
-                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-dark').trim(),
-                        padding: 15
-                    }
-                }
-            }
-        }
-    });
-}
-
-function createChartDispositivos() {
-    const ctx = document.getElementById('chartDispositivos').getContext('2d');
-    chartInstances.dispositivos = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Desktop', 'Mobile', 'Tablet'],
-            datasets: [{
-                label: 'Acessos',
-                data: [3200, 4100, 1900],
-                backgroundColor: [
-                    'rgba(100, 181, 246, 0.8)',
-                    'rgba(76, 175, 80, 0.8)',
-                    'rgba(255, 152, 0, 0.8)'
-                ]
-            }]
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-light').trim()
-                    }
-                },
-                y: {
-                    ticks: {
-                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-light').trim()
-                    }
-                }
-            }
-        }
-    });
-}
-
-function createChartConversao() {
-    const ctx = document.getElementById('chartConversao').getContext('2d');
-    chartInstances.conversao = new Chart(ctx, {
-        type: 'area',
-        data: {
-            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
-            datasets: [
-                {
-                    label: 'Visitantes',
-                    data: [150, 200, 180, 220, 210, 190, 160],
-                    borderColor: '#007bff',
-                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
-                    borderWidth: 2,
-                    tension: 0.4
-                },
-                {
-                    label: 'Conversões',
-                    data: [12, 19, 15, 22, 18, 14, 11],
-                    borderColor: '#28a745',
-                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
-                    borderWidth: 2,
-                    tension: 0.4
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-dark').trim()
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-light').trim()
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-light').trim()
-                    }
-                }
-            }
-        }
-    });
-}
-
-// ================= TEMA =================
-function setupTheme() {
+function setupThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
-    const savedTheme = localStorage.getItem('theme') || 'light';
     
+    // Carregar tema salvo
+    const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
         themeToggle.textContent = '☀️ Light';
@@ -337,67 +92,351 @@ function setupTheme() {
     });
 }
 
-// ================= MENU RESPONSIVO =================
-function setupResponsiveMenu() {
-    const menuToggle = document.querySelector('.menu-toggle');
+// ========================================
+// MENU TOGGLE (Mobile)
+// ========================================
+
+function setupMenuToggle() {
+    const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.querySelector('.sidebar');
     
     menuToggle.addEventListener('click', function() {
-        sidebar.classList.toggle('active');
+        sidebar.classList.toggle('open');
+    });
+}
+
+// ========================================
+// E-BOOKS FUNCTIONS
+// ========================================
+
+function renderEbooksGrid() {
+    const grid = document.querySelector('.ebooks-grid');
+    grid.innerHTML = '';
+    
+    ebooks.forEach(ebook => {
+        const card = document.createElement('div');
+        card.className = 'ebook-card-admin';
+        card.innerHTML = `
+            <img src="https://via.placeholder.com/200x280/${Math.floor(Math.random()*16777215).toString(16)}/ffffff?text=${ebook.titulo.substring(0, 10)}" alt="${ebook.titulo}">
+            <div class="ebook-info">
+                <h3>${ebook.titulo}</h3>
+                <p>${ebook.descricao}</p>
+                <div class="ebook-stats">
+                    <span>📊 ${ebook.vendas} vendas</span>
+                    <span>⭐ ${ebook.rating}/5</span>
+                </div>
+                <div class="ebook-price">${ebook.preco > 0 ? 'R$ ' + ebook.preco.toFixed(2) : 'Especial'}</div>
+                <div class="ebook-actions">
+                    <button class="btn-small edit" onclick="editEbook(${ebook.id})">✏️ Editar</button>
+                    <button class="btn-small delete" onclick="deleteEbook(${ebook.id})">🗑️ Deletar</button>
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function addNewEbook() {
+    const titulo = prompt('📚 Título do E-book:');
+    if (!titulo) return;
+    
+    const descricao = prompt('📝 Descrição:');
+    if (!descricao) return;
+    
+    const preco = prompt('💰 Preço (ou deixe em branco para "Especial"):');
+    
+    const novoEbook = {
+        id: Math.max(...ebooks.map(e => e.id), 0) + 1,
+        titulo,
+        descricao,
+        preco: preco ? parseFloat(preco) : 0,
+        vendas: 0,
+        rating: 5.0
+    };
+    
+    ebooks.push(novoEbook);
+    renderEbooksGrid();
+    saveToLocalStorage();
+    
+    alert(`✅ E-book "${titulo}" adicionado com sucesso!`);
+}
+
+function editEbook(id) {
+    const ebook = ebooks.find(e => e.id === id);
+    if (!ebook) return;
+    
+    const titulo = prompt('📚 Título:', ebook.titulo);
+    if (titulo === null) return;
+    
+    const descricao = prompt('📝 Descrição:', ebook.descricao);
+    if (descricao === null) return;
+    
+    const preco = prompt('💰 Preço (ou deixe em branco para "Especial"):', ebook.preco > 0 ? ebook.preco : '');
+    if (preco === null) return;
+    
+    ebook.titulo = titulo;
+    ebook.descricao = descricao;
+    ebook.preco = preco ? parseFloat(preco) : 0;
+    
+    renderEbooksGrid();
+    saveToLocalStorage();
+    
+    alert(`✅ E-book "${titulo}" atualizado com sucesso!`);
+}
+
+function deleteEbook(id) {
+    const ebook = ebooks.find(e => e.id === id);
+    if (!ebook) return;
+    
+    if (confirm(`🗑️ Tem certeza que deseja deletar "${ebook.titulo}"?`)) {
+        ebooks = ebooks.filter(e => e.id !== id);
+        renderEbooksGrid();
+        saveToLocalStorage();
+        alert(`✅ E-book "${ebook.titulo}" deletado com sucesso!`);
+    }
+}
+
+// ========================================
+// VENDAS FUNCTIONS
+// ========================================
+
+function renderVendasTable() {
+    const tbody = document.querySelector('#vendas-content .data-table tbody');
+    if (!tbody) return;
+    
+    tbody.innerHTML = '';
+    
+    vendas.forEach(venda => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>#V-${String(venda.id).padStart(3, '0')}</td>
+            <td>${venda.cliente}</td>
+            <td>${venda.ebook}</td>
+            <td>R$ ${venda.valor.toFixed(2)}</td>
+            <td>${venda.data}</td>
+            <td><span class="badge ${venda.status === 'Pago' ? 'success' : 'warning'}">${venda.status === 'Pago' ? '✓ Pago' : '⏳ Pendente'}</span></td>
+            <td><button class="btn-action" onclick="verVenda(${venda.id})">Ver</button></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function verVenda(id) {
+    const venda = vendas.find(v => v.id === id);
+    if (!venda) return;
+    
+    alert(`
+📊 DETALHES DA VENDA
+
+ID: #V-${String(venda.id).padStart(3, '0')}
+Cliente: ${venda.cliente}
+E-book: ${venda.ebook}
+Valor: R$ ${venda.valor.toFixed(2)}
+Data: ${venda.data}
+Status: ${venda.status}
+    `);
+}
+
+function exportarVendas() {
+    let csv = 'ID,Cliente,E-book,Valor,Data,Status\n';
+    
+    vendas.forEach(venda => {
+        csv += `#V-${String(venda.id).padStart(3, '0')},${venda.cliente},"${venda.ebook}",R$ ${venda.valor.toFixed(2)},${venda.data},${venda.status}\n`;
     });
     
-    // Fechar sidebar ao clicar fora
-    document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-            if (!e.target.closest('.sidebar') && !e.target.closest('.menu-toggle')) {
-                sidebar.classList.remove('active');
-            }
-        }
+    const link = document.createElement('a');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    link.href = URL.createObjectURL(blob);
+    link.download = `vendas_${new Date().toLocaleDateString()}.csv`;
+    link.click();
+    
+    alert('✅ Arquivo exportado com sucesso!');
+}
+
+// ========================================
+// CLIENTES FUNCTIONS
+// ========================================
+
+function renderClientesTable() {
+    const tbody = document.querySelector('#clientes-content .data-table tbody');
+    if (!tbody) return;
+    
+    tbody.innerHTML = '';
+    
+    clientes.forEach(cliente => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${cliente.nome}</td>
+            <td>${cliente.email}</td>
+            <td>${cliente.whatsapp}</td>
+            <td>${cliente.compras}</td>
+            <td>R$ ${cliente.total.toFixed(2)}</td>
+            <td>${cliente.data}</td>
+            <td><span class="badge success">Ativo</span></td>
+        `;
+        tbody.appendChild(tr);
     });
 }
 
-// ================= DADOS =================
-function loadDashboardData() {
-    console.log('📊 Dados do dashboard carregados');
-    // Aqui você conectaria com sua API
-    // const data = await fetch('/api/dashboard');
+function addNewCliente() {
+    const nome = prompt('👤 Nome do cliente:');
+    if (!nome) return;
+    
+    const email = prompt('📧 Email:');
+    if (!email) return;
+    
+    const whatsapp = prompt('📱 WhatsApp (com código país):');
+    if (!whatsapp) return;
+    
+    const novoCliente = {
+        id: Math.max(...clientes.map(c => c.id), 0) + 1,
+        nome,
+        email,
+        whatsapp,
+        compras: 0,
+        total: 0,
+        data: new Date().toLocaleDateString('pt-BR')
+    };
+    
+    clientes.push(novoCliente);
+    renderClientesTable();
+    saveToLocalStorage();
+    
+    alert(`✅ Cliente "${nome}" adicionado com sucesso!`);
 }
 
-// ================= FUNÇÕES ÚTEIS =================
-function addNewEbook() {
-    alert('🚀 Formulário para adicionar novo e-book');
-    // Implementar modal ou redirecionamento
+// ========================================
+// CONFIGURAÇÕES
+// ========================================
+
+function saveSettings() {
+    const email = document.querySelector('.input-setting');
+    if (email) {
+        localStorage.setItem('email-contato', email.value);
+        alert('✅ Configurações salvas com sucesso!');
+    }
 }
 
-function exportarDados() {
-    alert('📥 Exportando dados...');
-    // Implementar exportação CSV/Excel
+// ========================================
+// CHARTS
+// ========================================
+
+let charts = {};
+
+function initializeCharts() {
+    // Gráfico Receita por Mês
+    if (document.getElementById('chartReceita')) {
+        const ctx1 = document.getElementById('chartReceita').getContext('2d');
+        charts.receita = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Receita (R$)',
+                    data: [1200, 1900, 1500, 2200, 1800, 2100],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: true } } }
+        });
+    }
+    
+    // Gráfico E-books Mais Vendidos
+    if (document.getElementById('chartEbooks')) {
+        const ctx2 = document.getElementById('chartEbooks').getContext('2d');
+        charts.ebooks = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ebooks.map(e => e.titulo),
+                datasets: [{
+                    label: 'Vendas',
+                    data: ebooks.map(e => e.vendas),
+                    backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#43e97b']
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+    }
+    
+    // Gráfico Origem dos Clientes
+    if (document.getElementById('chartOrigem')) {
+        const ctx3 = document.getElementById('chartOrigem').getContext('2d');
+        charts.origem = new Chart(ctx3, {
+            type: 'doughnut',
+            data: {
+                labels: ['WhatsApp', 'Email', 'Instagram', 'Google'],
+                datasets: [{
+                    data: [45, 25, 20, 10],
+                    backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe']
+                }]
+            },
+            options: { responsive: true }
+        });
+    }
+    
+    // Gráfico Dispositivos
+    if (document.getElementById('chartDispositivos')) {
+        const ctx4 = document.getElementById('chartDispositivos').getContext('2d');
+        charts.dispositivos = new Chart(ctx4, {
+            type: 'pie',
+            data: {
+                labels: ['Mobile', 'Desktop', 'Tablet'],
+                datasets: [{
+                    data: [60, 30, 10],
+                    backgroundColor: ['#667eea', '#764ba2', '#43e97b']
+                }]
+            },
+            options: { responsive: true }
+        });
+    }
 }
 
-// ================= BUSCA =================
-const searchBox = document.querySelector('.search-box');
-searchBox?.addEventListener('input', function(e) {
-    const query = e.target.value.toLowerCase();
-    console.log('🔍 Buscando:', query);
-    // Implementar lógica de busca
+// ========================================
+// LOCAL STORAGE
+// ========================================
+
+function saveToLocalStorage() {
+    localStorage.setItem('dashboard-ebooks', JSON.stringify(ebooks));
+    localStorage.setItem('dashboard-clientes', JSON.stringify(clientes));
+    localStorage.setItem('dashboard-vendas', JSON.stringify(vendas));
+}
+
+function loadFromLocalStorage() {
+    const savedEbooks = localStorage.getItem('dashboard-ebooks');
+    const savedClientes = localStorage.getItem('dashboard-clientes');
+    const savedVendas = localStorage.getItem('dashboard-vendas');
+    
+    if (savedEbooks) ebooks = JSON.parse(savedEbooks);
+    if (savedClientes) clientes = JSON.parse(savedClientes);
+    if (savedVendas) vendas = JSON.parse(savedVendas);
+    
+    renderEbooksGrid();
+    renderVendasTable();
+    renderClientesTable();
+}
+
+// ========================================
+// BOTÃO EXPORTAR VENDAS
+// ========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const exportBtn = document.querySelector('#vendas-content .btn-secondary');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', exportarVendas);
+    }
+    
+    const addEbookBtn = document.querySelector('#ebooks-content .btn-primary');
+    if (addEbookBtn) {
+        addEbookBtn.addEventListener('click', addNewEbook);
+    }
+    
+    const addClienteBtn = document.querySelector('#clientes-content .btn-primary');
+    if (addClienteBtn) {
+        addClienteBtn.addEventListener('click', addNewCliente);
+    }
 });
 
-// ================= RESPONSIVE =================
-window.addEventListener('resize', function() {
-    Object.values(chartInstances).forEach(chart => {
-        if (chart && typeof chart.resize === 'function') {
-            chart.resize();
-        }
-    });
-});
-
-// ================= NOTIFICAÇÕES (Simuladas) =================
-function showNotification(message, type = 'info') {
-    console.log(`[${type.toUpperCase()}] ${message}`);
-    // Implementar sistema de notificações visual
-}
-
-// ================= LOGS =================
-console.log('%c🎉 Dashboard Administrativo Carregado', 'color: #007bff; font-size: 16px; font-weight: bold;');
-console.log('%c✅ Funcionalidades ativas:', 'color: #28a745; font-size: 12px;');
-console.log('📊 Dashboard | 📚 E-books | 💰 Vendas | 👥 Clientes | 📈 Analytics | ⚙️ Configurações');
+console.log('%c📊 Dashboard Admin - Todas as funcionalidades ativas!', 'color: #667eea; font-size: 14px; font-weight: bold;');
