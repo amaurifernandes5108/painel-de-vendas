@@ -1,0 +1,202 @@
+# .gitignore - Arquivo para Git ignorar certos arquivos
+
+# ============ DEPENDÊNCIAS ============
+node_modules/
+package-lock.json
+yarn.lock
+*.npm
+
+# ============ LOGS ============
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# ============ RUNTIME ============
+pids/
+*.pid
+*.seed
+*.pid.lock
+lib-cov
+coverage/
+*.lcov
+
+# ============ DIRETÓRIOS DE BUILD ============
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+.vuepress/dist/
+.serverless/
+
+# ============ SISTEMA OPERACIONAL ============
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+$RECYCLE.BIN/
+
+# ============ EDITOR ============
+.vscode/
+.idea/
+.sublime-project
+.sublime-workspace
+*.swp
+*.swo
+*~
+.project
+.classpath
+*.c9/
+*.el
+*.swp
+*.swo
+
+# ============ IDE ============
+.vscode
+.idea
+*.iml
+*.iws
+*.ipr
+*.user
+
+# ============ VARIÁVEIS DE AMBIENTE ============
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ============ ARQUIVOS PESSOAIS ============
+.secret
+secrets/
+*.key
+*.pem
+
+# ============ BACKUP ============
+*.backup
+*.bak
+*.tmp
+*.temp
+
+# ============ SISTEMA DE CONTROLE DE VERSÃO ============
+.git/
+.gitignore
+.gitattributes
+
+# ============ GERENCIADORES DE PACOTES ============
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+
+# ============ ARQUIVOS DE TESTE ============
+.nyc_output/
+coverage/
+
+# ============ DIRETÓRIOS DESNECESSÁRIOS ============
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# ============ ARQUIVOS COMPILADOS ============
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.exe
+
+# ============ ARQUIVOS TEMPORÁRIOS ============
+*.tmp
+*.temp
+tmp/
+temp/
+
+# ============ LOCK FILES (Opcional - descomente se quiser ignorar) ============
+# package-lock.json
+# yarn.lock
+# Gemfile.lock
+
+# ============ ARQUIVOS ESPECÍFICOS ============
+.jshintrc
+.eslintignore
+tsconfig.json
+
+# ============ MACOS ============
+.AppleDouble
+.LSOverride
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# ============ WINDOWS ============
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ============ LINUX ============
+.*
+!.gitignore
+
+# ============ FERRAMENTAS ============
+.grunt/
+.gulp/
+.cache
+
+# ============ ANÁLISE ESTÁTICA ============
+.eslintcache
+.stylelintcache
+
+# ============ DOCUMENTAÇÃO ============
+docs/node_modules/
+
+# ============ ARQUIVOS GERADOS ============
+site/
+.htmlhintrc
+
+# ============ WEBPACK ============
+dist/
+.webpack/
+
+# ============ BABEL ============
+.babelrc
+
+# ============ EXCEÇÕES - INCLUIR ARQUIVOS ============
+# Use ! para incluir arquivos que foram ignorados
+# Exemplo:
+# !.gitkeep
+# !.env.example
+
+# ============ ARQUIVOS DO PROJETO QUE QUEREMOS MANTER ============
+# Certifique-se de que os arquivos principais estão sendo rastreados:
+# - *.html
+# - *.css
+# - *.js
+# - *.md
+# - *.json
+# - *.toml
+
+# ============ DICA ============
+# Para visualizar quais arquivos estão sendo ignorados:
+# git check-ignore -v .
+
+# ============ VERIFICAR STATUS ============
+# Para ver o status dos arquivos:
+# git status
+
+# Para adicionar tudo (respeitando .gitignore):
+# git add .
+
+# ============ FIM DO ARQUIVO ============

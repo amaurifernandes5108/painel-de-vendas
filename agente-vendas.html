@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agente de Vendas - Chat</title>
+    <link rel="stylesheet" href="agente-vendas.css">
+</head>
+<body>
+    <!-- WIDGET DO AGENTE -->
+    <div class="agente-container" id="agenteContainer">
+        <!-- BOTÃO FLUTUANTE FECHADO -->
+        <button class="agente-toggle" id="agenteToggle">
+            <span class="agente-icon">🤖</span>
+            <span class="agente-text">Agente</span>
+        </button>
+
+        <!-- CHAT ABERTO -->
+        <div class="agente-chat" id="agenteChat">
+            <!-- HEADER -->
+            <div class="agente-header">
+                <div class="agente-header-left">
+                    <div class="agente-avatar">🤖</div>
+                    <div class="agente-info">
+                        <h3>Agente de Vendas</h3>
+                        <span class="agente-status">🟢 Online</span>
+                    </div>
+                </div>
+                <button class="agente-close" id="agenteClose">✕</button>
+            </div>
+
+            <!-- BODY (MENSAGENS) -->
+            <div class="agente-messages" id="agenteMessages">
+                <div class="mensagem bot">
+                    <div class="mensagem-content">
+                        Olá! 👋 Bem-vindo! Sou o Agente de Vendas. Como posso ajudá-lo hoje?
+                    </div>
+                    <span class="mensagem-time">Agora</span>
+                </div>
+            </div>
+
+            <!-- FOOTER (INPUT) -->
+            <div class="agente-footer">
+                <div class="agente-quick-buttons">
+                    <button class="quick-btn" onclick="enviarMensagem('Quero saber mais sobre os e-books')">📚 E-books</button>
+                    <button class="quick-btn" onclick="enviarMensagem('Qual é o preço?')">💰 Preço</button>
+                    <button class="quick-btn" onclick="enviarMensagem('Preciso de suporte')">🆘 Suporte</button>
+                </div>
+                
+                <div class="agente-input-group">
+                    <input 
+                        type="text" 
+                        class="agente-input" 
+                        id="agenteInput" 
+                        placeholder="Digite sua mensagem..."
+                        onkeypress="handleKeyPress(event)"
+                    >
+                    <button class="agente-send" onclick="enviarMensagemInput()">📤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="agente-vendas.js"></script>
+</body>
+</html>

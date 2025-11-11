@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Dashboard Admin - Seu Nome</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">📚</div>
+            <h2>Admin Panel</h2>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="#dashboard" class="menu-item active" data-section="dashboard">
+                <span class="icon">📊</span>
+                <span class="label">Dashboard</span>
+            </a>
+            <a href="#ebooks" class="menu-item" data-section="ebooks">
+                <span class="icon">📚</span>
+                <span class="label">E-books</span>
+            </a>
+            <a href="#vendas" class="menu-item" data-section="vendas">
+                <span class="icon">💰</span>
+                <span class="label">Vendas</span>
+            </a>
+            <a href="#clientes" class="menu-item" data-section="clientes">
+                <span class="icon">👥</span>
+                <span class="label">Clientes</span>
+            </a>
+            <a href="#analytics" class="menu-item" data-section="analytics">
+                <span class="icon">📈</span>
+                <span class="label">Analytics</span>
+            </a>
+            <a href="#settings" class="menu-item" data-section="settings">
+                <span class="icon">⚙️</span>
+                <span class="label">Configurações</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="theme-toggle" id="theme-toggle">🌙 Dark</button>
+            <p>v1.0 | 2025</p>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- TOP BAR -->
+        <div class="topbar">
+            <div class="topbar-left">
+                <h1 id="page-title">Dashboard</h1>
+            </div>
+            <div class="topbar-right">
+                <input type="text" class="search-box" placeholder="🔍 Buscar...">
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/40/007bff/ffffff?text=U" alt="Usuário">
+                    <span>Você</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <!-- DASHBOARD SECTION -->
+            <section id="dashboard-content" class="section active">
+                <!-- KPIs -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">💰</div>
+                        <div class="kpi-info">
+                            <h3>Receita Total</h3>
+                            <p class="kpi-value">R$ 12.450,00</p>
+                            <span class="kpi-change positive">+12% este mês</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📦</div>
+                        <div class="kpi-info">
+                            <h3>E-books Vendidos</h3>
+                            <p class="kpi-value">238</p>
+                            <span class="kpi-change positive">+8.5% este mês</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">👥</div>
+                        <div class="kpi-info">
+                            <h3>Clientes Ativos</h3>
+                            <p class="kpi-value">1.240</p>
+                            <span class="kpi-change positive">+5.2% este mês</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">📞</div>
+                        <div class="kpi-info">
+                            <h3>Mensagens WhatsApp</h3>
+                            <p class="kpi-value">3.842</p>
+                            <span class="kpi-change positive">+18.3% este mês</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHARTS -->
+                <div class="charts-grid">
+                    <!-- Receita por Mês -->
+                    <div class="chart-card">
+                        <h3>📈 Receita por Mês</h3>
+                        <canvas id="chartReceita"></canvas>
+                    </div>
+
+                    <!-- E-books mais Vendidos -->
+                    <div class="chart-card">
+                        <h3>🏆 E-books Mais Vendidos</h3>
+                        <canvas id="chartEbooks"></canvas>
+                    </div>
+                </div>
+
+                <!-- ÚLTIMAS VENDAS -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3>💳 Últimas Vendas</h3>
+                        <a href="#vendas" class="link-view">Ver tudo →</a>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>E-book</th>
+                                <th>Valor</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>João Silva</td>
+                                <td>O Livro da Fé</td>
+                                <td>R$ 49,90</td>
+                                <td>11/11/2025</td>
+                                <td><span class="badge success">✓ Pago</span></td>
+                            </tr>
+                            <tr>
+                                <td>Maria Santos</td>
+                                <td>Teologia Digital</td>
+                                <td>R$ 59,90</td>
+                                <td>11/11/2025</td>
+                                <td><span class="badge success">✓ Pago</span></td>
+                            </tr>
+                            <tr>
+                                <td>Pedro Costa</td>
+                                <td>Espiritualidade Prática</td>
+                                <td>R$ 54,90</td>
+                                <td>10/11/2025</td>
+                                <td><span class="badge warning">⏳ Pendente</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ana Oliveira</td>
+                                <td>O Livro da Fé</td>
+                                <td>R$ 49,90</td>
+                                <td>10/11/2025</td>
+                                <td><span class="badge success">✓ Pago</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- E-BOOKS SECTION -->
+            <section id="ebooks-content" class="section">
+                <div class="section-header-full">
+                    <h2>Gerenciar E-books</h2>
+                    <button class="btn-primary" onclick="addNewEbook()">+ Novo E-book</button>
+                </div>
+
+                <div class="ebooks-grid">
+                    <div class="ebook-card-admin">
+                        <img src="https://via.placeholder.com/200x280/007bff/ffffff?text=Livro%201" alt="Livro">
+                        <div class="ebook-info">
+                            <h3>O Livro da Fé</h3>
+                            <p>Teologia & Espiritualidade</p>
+                            <div class="ebook-stats">
+                                <span>📊 145 vendas</span>
+                                <span>⭐ 4.8/5</span>
+                            </div>
+                            <div class="ebook-price">R$ 49,90</div>
+                            <div class="ebook-actions">
+                                <button class="btn-small edit">✏️ Editar</button>
+                                <button class="btn-small delete">🗑️ Deletar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ebook-card-admin">
+                        <img src="https://via.placeholder.com/200x280/28a745/ffffff?text=Livro%202" alt="Livro">
+                        <div class="ebook-info">
+                            <h3>Conteúdo & Teologia Digital</h3>
+                            <p>Para Criadores de Conteúdo</p>
+                            <div class="ebook-stats">
+                                <span>📊 89 vendas</span>
+                                <span>⭐ 4.9/5</span>
+                            </div>
+                            <div class="ebook-price">R$ 59,90</div>
+                            <div class="ebook-actions">
+                                <button class="btn-small edit">✏️ Editar</button>
+                                <button class="btn-small delete">🗑️ Deletar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ebook-card-admin">
+                        <img src="https://via.placeholder.com/200x280/dc3545/ffffff?text=Livro%203" alt="Livro">
+                        <div class="ebook-info">
+                            <h3>Espiritualidade Prática</h3>
+                            <p>Vida Espiritual Profunda</p>
+                            <div class="ebook-stats">
+                                <span>📊 104 vendas</span>
+                                <span>⭐ 4.7/5</span>
+                            </div>
+                            <div class="ebook-price">R$ 54,90</div>
+                            <div class="ebook-actions">
+                                <button class="btn-small edit">✏️ Editar</button>
+                                <button class="btn-small delete">🗑️ Deletar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VENDAS SECTION -->
+            <section id="vendas-content" class="section">
+                <div class="section-header-full">
+                    <h2>Histórico de Vendas</h2>
+                    <button class="btn-secondary">📥 Exportar</button>
+                </div>
+
+                <div class="filters">
+                    <input type="date" class="filter-input">
+                    <select class="filter-input">
+                        <option>Todos os Status</option>
+                        <option>Pago</option>
+                        <option>Pendente</option>
+                        <option>Cancelado</option>
+                    </select>
+                    <input type="text" class="filter-input" placeholder="Buscar cliente...">
+                </div>
+
+                <table class="data-table full-width">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>E-book</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#V-001</td>
+                            <td>João Silva</td>
+                            <td>O Livro da Fé</td>
+                            <td>R$ 49,90</td>
+                            <td>11/11/2025</td>
+                            <td><span class="badge success">✓ Pago</span></td>
+                            <td><button class="btn-action">Ver</button></td>
+                        </tr>
+                        <tr>
+                            <td>#V-002</td>
+                            <td>Maria Santos</td>
+                            <td>Teologia Digital</td>
+                            <td>R$ 59,90</td>
+                            <td>11/11/2025</td>
+                            <td><span class="badge success">✓ Pago</span></td>
+                            <td><button class="btn-action">Ver</button></td>
+                        </tr>
+                        <tr>
+                            <td>#V-003</td>
+                            <td>Pedro Costa</td>
+                            <td>Espiritualidade Prática</td>
+                            <td>R$ 54,90</td>
+                            <td>10/11/2025</td>
+                            <td><span class="badge warning">⏳ Pendente</span></td>
+                            <td><button class="btn-action">Ver</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- CLIENTES SECTION -->
+            <section id="clientes-content" class="section">
+                <div class="section-header-full">
+                    <h2>Gestão de Clientes</h2>
+                    <button class="btn-primary">+ Novo Cliente</button>
+                </div>
+
+                <table class="data-table full-width">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>WhatsApp</th>
+                            <th>Compras</th>
+                            <th>Total Gasto</th>
+                            <th>Data Cadastro</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>João Silva</td>
+                            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="610b0e000e21040c00080d4f020e0c">[email&#160;protected]</a></td>
+                            <td>+55 24 99999-1111</td>
+                            <td>3</td>
+                            <td>R$ 149,70</td>
+                            <td>15/10/2025</td>
+                            <td><span class="badge success">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td>Maria Santos</td>
+                            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0865697a6169486d65696164266b6765">[email&#160;protected]</a></td>
+                            <td>+55 24 99999-2222</td>
+                            <td>1</td>
+                            <td>R$ 59,90</td>
+                            <td>20/10/2025</td>
+                            <td><span class="badge success">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td>Pedro Costa</td>
+                            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="28584d4c5a47684d45494144064b4745">[email&#160;protected]</a></td>
+                            <td>+55 24 99999-3333</td>
+                            <td>2</td>
+                            <td>R$ 104,80</td>
+                            <td>22/10/2025</td>
+                            <td><span class="badge warning">Inativo</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ANALYTICS SECTION -->
+            <section id="analytics-content" class="section">
+                <div class="section-header-full">
+                    <h2>Analytics & Relatórios</h2>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="section-card">
+                        <h3>👥 Origem dos Clientes</h3>
+                        <canvas id="chartOrigem"></canvas>
+                    </div>
+                    <div class="section-card">
+                        <h3>📱 Acessos por Dispositivo</h3>
+                        <canvas id="chartDispositivos"></canvas>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3>📊 Conversão por Semana</h3>
+                    <canvas id="chartConversao" style="max-height: 300px;"></canvas>
+                </div>
+            </section>
+
+            <!-- SETTINGS SECTION -->
+            <section id="settings-content" class="section">
+                <div class="section-header-full">
+                    <h2>⚙️ Configurações</h2>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>📱 WhatsApp</h3>
+                        <div class="setting-item">
+                            <label>Número WhatsApp</label>
+                            <div class="setting-value">+5524998321054</div>
+                            <button class="btn-secondary">Editar</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>💳 Pagamento</h3>
+                        <div class="setting-item">
+                            <label>Integração Kiwify</label>
+                            <div class="setting-value">✓ Conectado</div>
+                            <button class="btn-secondary">Configurar</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>📧 Email</h3>
+                        <div class="setting-item">
+                            <label>Email de Contato</label>
+                            <input type="email" value="seu@email.com" class="input-setting">
+                            <button class="btn-primary">Salvar</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>🔔 Notificações</h3>
+                        <div class="setting-item checkbox">
+                            <input type="checkbox" checked>
+                            <label>Notificar de novas vendas</label>
+                        </div>
+                        <div class="setting-item

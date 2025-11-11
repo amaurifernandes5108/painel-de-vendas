@@ -1,0 +1,356 @@
+/* ========================================
+   CATÁLOGO DE E-BOOKS COM AGENTE WHATSAPP
+   ======================================== */
+
+/* 1. RESET E ESTILOS GLOBAIS */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* 2. CABEÇALHO */
+.app-header {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.6s ease-out;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 2.2em;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.app-header p {
+    margin-top: 10px;
+    font-size: 1em;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* 3. CATÁLOGO PRINCIPAL */
+.catalog-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+/* 4. ITEM DE E-BOOK */
+.ebook-item {
+    display: flex;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+    padding: 20px;
+    text-align: left;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.ebook-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* CAPA DO E-BOOK */
+.cover-image {
+    width: 120px;
+    height: 160px;
+    min-width: 120px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    margin-right: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.ebook-item:hover .cover-image {
+    transform: scale(1.05);
+}
+
+/* DETALHES DO E-BOOK */
+.ebook-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ebook-details h2 {
+    margin: 0 0 8px 0;
+    font-size: 1.3em;
+    color: #007bff;
+    font-weight: 600;
+}
+
+.ebook-details p {
+    margin: 0 0 15px 0;
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: #666;
+}
+
+/* BOTÃO DE ACESSO */
+.access-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    color: white;
+    padding: 10px 18px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.access-button:hover {
+    background: linear-gradient(135deg, #1e7e34 0%, #155c2e 100%);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.access-button:active {
+    transform: scale(0.98);
+}
+
+/* 5. RODAPÉ */
+.app-footer {
+    padding: 30px 20px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    font-size: 0.9em;
+    color: #999;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-top: 40px;
+}
+
+/* 6. BOTÃO WHATSAPP FLUTUANTE */
+#whatsapp-agent {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    
+    /* Animação de Entrada */
+    opacity: 0;
+    transform: scale(0) translateY(20px);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Estilização */
+    background: linear-gradient(135deg, #25d366 0%, #1ece63 100%);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1000;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.95em;
+    border: none;
+    user-select: none;
+}
+
+/* Estado Ativo - Aparece com Animação */
+#whatsapp-agent.active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    animation: pulse 2s infinite;
+}
+
+/* Hover */
+#whatsapp-agent:hover {
+    background: linear-gradient(135deg, #1ece63 0%, #128c7e 100%);
+    transform: scale(1.12);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
+
+/* Ícone */
+#whatsapp-agent .icon {
+    font-size: 1.6em;
+}
+
+/* Texto */
+#whatsapp-agent .text {
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+/* 7. ANIMAÇÕES */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+    }
+    50% {
+        box-shadow: 0 5px 35px rgba(37, 211, 102, 0.6);
+    }
+}
+
+/* 8. RESPONSIVIDADE - TABLET */
+@media (max-width: 768px) {
+    .app-header h1 {
+        font-size: 1.8em;
+    }
+
+    .ebook-item {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .cover-image {
+        width: 100px;
+        height: 140px;
+        margin-right: 15px;
+    }
+
+    .ebook-details h2 {
+        font-size: 1.1em;
+    }
+
+    .ebook-details p {
+        font-size: 0.9em;
+    }
+
+    #whatsapp-agent {
+        padding: 12px 16px;
+        font-size: 0.9em;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    #whatsapp-agent .icon {
+        font-size: 1.4em;
+    }
+}
+
+/* 9. RESPONSIVIDADE - MOBILE */
+@media (max-width: 480px) {
+    .app-header {
+        padding: 25px 15px;
+    }
+
+    .app-header h1 {
+        font-size: 1.5em;
+    }
+
+    .app-header p {
+        font-size: 0.9em;
+    }
+
+    .catalog-container {
+        margin: 20px auto;
+    }
+
+    .ebook-item {
+        flex-direction: column;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .cover-image {
+        width: 100%;
+        height: 200px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .ebook-details h2 {
+        font-size: 1.1em;
+    }
+
+    .ebook-details p {
+        font-size: 0.9em;
+    }
+
+    .access-button {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* WhatsApp em Mobile Pequeno - Apenas Ícone */
+    #whatsapp-agent {
+        width: 55px;
+        height: 55px;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        bottom: 10px;
+        right: 10px;
+        gap: 0;
+    }
+
+    #whatsapp-agent .text {
+        display: none;
+    }
+
+    #whatsapp-agent .icon {
+        font-size: 1.8em;
+    }
+}
+
+/* 10. MODO ESCURO (Opcional) */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
+    .ebook-item,
+    .app-footer {
+        background-color: #2a2a3e;
+        color: #e0e0e0;
+    }
+
+    .ebook-details h2 {
+        color: #4a9eff;
+    }
+
+    .ebook-details p {
+        color: #b0b0b0;
+    }
+
+    .app-footer {
+        border-top-color: #444;
+        color: #888;
+    }
+}

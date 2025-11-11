@@ -1,0 +1,429 @@
+/* ========================================
+   AGENTE DE VENDAS - CHATBOT STYLE
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* CONTAINER */
+.agente-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+/* BOTÃO TOGGLE (FECHADO) */
+.agente-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    animation: bounce 2s infinite;
+}
+
+.agente-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.agente-toggle.hidden {
+    display: none;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.agente-icon {
+    font-size: 1.8em;
+}
+
+.agente-text {
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+/* CHAT BOX (ABERTO) */
+.agente-chat {
+    width: 380px;
+    height: 600px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.agente-chat.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* HEADER */
+.agente-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.agente-header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.agente-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+}
+
+.agente-info h3 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.agente-status {
+    font-size: 0.85em;
+    opacity: 0.9;
+}
+
+.agente-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.agente-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* MESSAGES AREA */
+.agente-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.mensagem {
+    display: flex;
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mensagem.bot {
+    justify-content: flex-start;
+}
+
+.mensagem.user {
+    justify-content: flex-end;
+}
+
+.mensagem-content {
+    max-width: 70%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+.mensagem.bot .mensagem-content {
+    background: white;
+    color: #333;
+    border-bottom-left-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.mensagem.user .mensagem-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-bottom-right-radius: 3px;
+}
+
+.mensagem-time {
+    font-size: 0.75em;
+    color: #999;
+    margin-top: 5px;
+    display: block;
+    text-align: center;
+}
+
+/* SCROLLBAR */
+.agente-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.agente-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.agente-messages::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.agente-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* FOOTER */
+.agente-footer {
+    padding: 15px;
+    border-top: 1px solid #e0e0e0;
+    background: white;
+    border-radius: 0 0 15px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* QUICK BUTTONS */
+.agente-quick-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.quick-btn {
+    padding: 8px 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    word-break: break-word;
+}
+
+.quick-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.quick-btn:active {
+    transform: translateY(0);
+}
+
+/* INPUT GROUP */
+.agente-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.agente-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.agente-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.agente-send {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.agente-send:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.agente-send:active {
+    transform: scale(0.95);
+}
+
+/* LOADING INDICATOR */
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+    background: white;
+    border-radius: 12px;
+    width: fit-content;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #667eea;
+    animation: typing 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        opacity: 0.3;
+        transform: translateY(0);
+    }
+    30% {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 480px) {
+    .agente-chat {
+        width: calc(100vw - 40px);
+        height: 70vh;
+        max-height: 500px;
+    }
+
+    .mensagem-content {
+        max-width: 85%;
+    }
+
+    .agente-quick-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-btn {
+        font-size: 0.9em;
+    }
+
+    .agente-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2em;
+    }
+}
+
+/* DARK MODE */
+@media (prefers-color-scheme: dark) {
+    .agente-chat {
+        background: #2a2a3e;
+        color: #eaeaea;
+    }
+
+    .agente-messages {
+        background: #1a1a2e;
+    }
+
+    .mensagem.bot .mensagem-content {
+        background: #16213e;
+        color: #eaeaea;
+    }
+
+    .agente-footer {
+        background: #2a2a3e;
+        border-top-color: #444;
+    }
+
+    .agente-input {
+        background: #16213e;
+        color: #eaeaea;
+        border-color: #444;
+    }
+
+    .agente-input:focus {
+        border-color: #667eea;
+    }
+
+    .mensagem-time {
+        color: #777;
+    }
+}

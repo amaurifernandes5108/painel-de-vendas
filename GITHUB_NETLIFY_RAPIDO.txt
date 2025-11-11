@@ -1,0 +1,314 @@
+╔════════════════════════════════════════════════════════════════════╗
+║                 🚀 GITHUB + NETLIFY - GUIA RÁPIDO                 ║
+║            Em 10 Minutos seu site está ONLINE e GRÁTIS!          ║
+╚════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⏱️ TEMPO NECESSÁRIO: ~10 MINUTOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 O QUE VOCÊ VAI FAZER:
+
+1️⃣ GitHub - Armazenar seu código
+2️⃣ Netlify - Fazer deploy automático
+3️⃣ URL - Receber seu link online
+4️⃣ Compartilhar - Com seus clientes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 O QUE VOCÊ VAI PRECISAR:
+
+□ Email (para GitHub e Netlify)
+□ Seus arquivos do projeto
+□ Navegador web
+□ 10 minutos de tempo
+
+NÃO PRECISA:
+- Cartão de crédito ✓
+- Configurações complicadas ✓
+- Conhecimento técnico avançado ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ PASSO 1: CRIAR CONTA NO GITHUB (2 MIN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Vá para: https://github.com
+2. Clique em "Sign up" (canto superior direito)
+3. Preenchha:
+   └─ Email
+   └─ Senha
+   └─ Usuário (ex: seu-nome-vendedor)
+4. Confirme email
+5. Pronto! ✅
+
+RESULTADO:
+├─ Você tem conta no GitHub
+├─ Sua URL pessoal é: github.com/SEU_USUARIO
+└─ Está pronto para próximo passo
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ PASSO 2: CRIAR REPOSITÓRIO (2 MIN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. No GitHub, clique no + (topo direito)
+2. Clique em "New repository"
+3. Preencha:
+
+   Repository name:
+   └─ ebook-store
+   
+   Description:
+   └─ Catálogo de E-books com Dashboard
+   
+   Public or Private:
+   └─ ⭕ Public (para todos verem)
+   
+   Inicialize com README:
+   └─ ☐ NÃO marque
+
+4. Clique em "Create repository"
+
+RESULTADO:
+├─ Repositório criado
+├─ URL: github.com/SEU_USUARIO/ebook-store
+└─ Pronto para receber os arquivos
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ PASSO 3: UPLOAD DOS ARQUIVOS (3 MIN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OPÇÃO A: Upload via Website (Mais Fácil)
+
+1. No seu repositório, clique em "Add file"
+2. Clique em "Upload files"
+3. Arraste seus arquivos ou clique para selecionar:
+   ├─ index.html
+   ├─ style.css
+   ├─ script.js
+   ├─ dashboard.html
+   ├─ dashboard.css
+   ├─ dashboard.js
+   ├─ agente-vendas.html
+   ├─ agente-vendas.css
+   ├─ agente-vendas.js
+   └─ README.md
+
+4. Clique em "Commit changes"
+5. Pronto! ✅
+
+OPÇÃO B: Linha de Comando (Se souber Git)
+
+```
+git clone https://github.com/SEU_USUARIO/ebook-store
+cd ebook-store
+# Copie os arquivos aqui
+git add .
+git commit -m "🚀 Inicial"
+git push origin main
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ PASSO 4: CRIAR CONTA NO NETLIFY (2 MIN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Vá para: https://www.netlify.com
+2. Clique em "Sign up"
+3. Escolha "GitHub"
+4. Autorize o Netlify acessar sua conta
+5. Pronto! ✅
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ PASSO 5: CONECTAR REPOSITÓRIO (2 MIN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. No Netlify, clique "New site from Git"
+2. Escolha "GitHub"
+3. Selecione seu repositório: "ebook-store"
+4. Configure:
+
+   Branch:
+   └─ main (deixe assim)
+   
+   Build command:
+   └─ Deixe em branco
+   
+   Publish directory:
+   └─ . (um ponto)
+
+5. Clique "Deploy site"
+6. Aguarde o processamento (1-2 minutos)
+
+VOCÊ VERÁ:
+├─ Status: Building...
+├─ Depois: Published ✅
+└─ URL: https://SEU_NOME_ALEATORIO.netlify.app
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎉 PRONTO! SEU SITE ESTÁ ONLINE!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VOCÊ RECEBEU:
+
+✅ URL do seu site
+   └─ https://SEU_NOME_ALEATORIO.netlify.app
+
+✅ Hospedagem GRÁTIS
+   └─ Sem limite de banda
+   └─ SSL certificado (HTTPS)
+   └─ CDN global
+
+✅ Deploy automático
+   └─ Cada vez que fizer push no GitHub
+   └─ Netlify faz deploy automaticamente
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📱 TESTAR AGORA:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Copie sua URL do Netlify
+2. Abra em navegador (mobile, desktop, tablet)
+3. Veja tudo funcionando! 🎉
+
+ACESSOS:
+├─ Catálogo: https://seu-site.netlify.app
+├─ Dashboard: https://seu-site.netlify.app/dashboard.html
+└─ Chat de vendas: https://seu-site.netlify.app/agente-vendas.html
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 COMPARTILHE SUA URL:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Seu site está pronto! Compartilhe com seus clientes:
+
+📱 WhatsApp:
+   "Veja meus e-books aqui: https://seu-site.netlify.app"
+
+📧 Email:
+   "Confira o catálogo: https://seu-site.netlify.app"
+
+📱 Instagram:
+   "Link na bio: https://seu-site.netlify.app"
+
+💬 Facebook:
+   "Acesse: https://seu-site.netlify.app"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔄 FAZER ATUALIZAÇÕES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Para mudar algo no seu site:
+
+1. Acesse seu repositório no GitHub
+2. Edite o arquivo (ex: index.html)
+3. Clique em editar (lápis)
+4. Faça as mudanças
+5. Clique "Commit changes"
+6. Aguarde 1-2 minutos
+7. Seu site atualiza automaticamente! 🚀
+
+SEM NECESSIDADE DE FAZER UPLOAD NOVAMENTE!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌍 USAR DOMÍNIO PRÓPRIO (OPCIONAL):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Se quiser usar seu próprio domínio (ex: ebook-store.com.br):
+
+1. Compre em: Registro.br, GoDaddy, etc
+2. No Netlify, vá em "Domain settings"
+3. Clique "Add custom domain"
+4. Digite seu domínio
+5. Siga instruções de DNS
+6. Pronto! 🎉
+
+(Netlify fornece certificado SSL GRÁTIS!)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🆘 PROBLEMAS COMUNS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ "Site mostra 404"
+✅ Solução:
+   - Verifique se index.html está na raiz
+   - Aguarde 2 minutos (cache)
+   - Faça hard refresh (Ctrl+Shift+R)
+
+❌ "Netlify não encontra o repositório"
+✅ Solução:
+   - Faça logout e login novamente
+   - Autorize Netlify novamente
+   - Confirme que repositório é público
+
+❌ "Mudanças não aparecem"
+✅ Solução:
+   - Aguarde 1-2 minutos
+   - Aguarde o build terminar (confira status no Netlify)
+   - Limpe cache (Ctrl+Shift+Del)
+
+❌ "Não consigo fazer upload no GitHub"
+✅ Solução:
+   - Verifique sua conexão de internet
+   - Tente novamente
+   - Use upload via website (mais fácil)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 SEU NOVO SETUP:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Você agora tem:
+
+✅ GitHub
+   └─ Seu código armazenado e versionado
+   └─ Histórico de mudanças
+   └─ Colaboração fácil
+
+✅ Netlify
+   └─ Hospedagem GRÁTIS
+   └─ Deploy automático
+   └─ URL profissional
+
+✅ Site Online 24/7
+   └─ Sem se preocupar com servidor
+   └─ Segurança com SSL
+   └─ Velocidade global com CDN
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 PRÓXIMAS AÇÕES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+□ Testar seu site completo
+□ Testar em mobile (responsividade)
+□ Testar botões WhatsApp
+□ Testar dashboard
+□ Testar agente de vendas
+□ Compartilhar URL com amigos
+□ Coletar feedback
+□ Fazer ajustes conforme necessário
+□ Começar a vender! 💰
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 RECURSOS ADICIONAIS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GitHub Docs: https://docs.github.com
+Netlify Docs: https://docs.netlify.com
+Git Tutorial: https://git-scm.com/doc
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎉 PARABÉNS!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Você completou o setup profissional do seu negócio digital! 🚀
+
+Seu site agora está:
+✅ Online
+✅ Seguro (HTTPS)
+✅ Rápido (CDN global)
+✅ Pronto para vendas
+
+Próximo passo: Comece a vender! 💰
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Desenvolvido com ❤️ para criadores de conteúdo
+
+Sucesso! 🚀📈💰

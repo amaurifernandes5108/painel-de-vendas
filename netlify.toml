@@ -1,0 +1,97 @@
+# Netlify Configuration File
+# Arquivo de configuração para deploy automático no Netlify
+
+[build]
+  # Comando de build (não necessário para site estático)
+  command = "echo 'Site estático - nenhum build necessário'"
+  
+  # Diretório a ser publicado
+  publish = "."
+  
+  # Timeout em segundos
+  timeout = 30
+
+# Redirecionamentos
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers de segurança
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevenir MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    
+    # Prevenir clickjacking
+    X-Frame-Options = "SAMEORIGIN"
+    
+    # Ativar proteção XSS
+    X-XSS-Protection = "1; mode=block"
+    
+    # Cache headers
+    Cache-Control = "public, max-age=3600"
+
+# Headers específicos para HTML
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Content-Type = "text/html; charset=utf-8"
+
+# Headers específicos para CSS/JS
+[[headers]]
+  for = "/*.{css,js}"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# Compressão de arquivos
+[[plugins]]
+  package = "@netlify/plugin-gzip"
+
+# Variáveis de ambiente (production)
+[context.production]
+  environment = { NODE_ENV = "production" }
+
+# Variáveis de ambiente (preview)
+[context.preview]
+  environment = { NODE_ENV = "development" }
+
+# Variáveis de ambiente (deploy-preview)
+[context.deploy-preview]
+  environment = { NODE_ENV = "development" }
+
+# Configuração de função (se necessário no futuro)
+[functions]
+  directory = "functions"
+  node_bundler = "esbuild"
+
+# Build triggers - rebuild automático em mudanças
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+# Context específico para branch main
+[context.main]
+  command = "echo 'Deploy da branch main'"
+  environment = { CONTEXT = "main" }
+
+# Deploy status e notificações
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  [plugins.inputs]
+    disabled = false
+
+# Dica: Você pode adicionar mais funcionalidades aqui conforme necessário
+# Documentação: https://docs.netlify.com/configure-builds/file-based-configuration/
