@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt">
+<script>
+if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'login.html';
+}
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📊 Dashboard Admin - Seu Nome</title>
+    <title>📊 Dashboard Admin - Painel de Vendas</title>
     <link rel="stylesheet" href="dashboard.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
@@ -62,6 +67,9 @@
                     <img src="https://via.placeholder.com/40/007bff/ffffff?text=U" alt="Usuário">
                     <span>Você</span>
                 </div>
+                <button onclick="logout()" class="logout-button" title="Fazer logout">
+                    🚪 Sair
+                </button>
             </div>
         </div>
 
@@ -110,13 +118,11 @@
 
                 <!-- CHARTS -->
                 <div class="charts-grid">
-                    <!-- Receita por Mês -->
                     <div class="chart-card">
                         <h3>📈 Receita por Mês</h3>
                         <canvas id="chartReceita"></canvas>
                     </div>
 
-                    <!-- E-books mais Vendidos -->
                     <div class="chart-card">
                         <h3>🏆 E-books Mais Vendidos</h3>
                         <canvas id="chartEbooks"></canvas>
@@ -201,7 +207,7 @@
                     <div class="ebook-card-admin">
                         <img src="https://via.placeholder.com/200x280/28a745/ffffff?text=Livro%202" alt="Livro">
                         <div class="ebook-info">
-                            <h3>Conteúdo & Teologia Digital</h3>
+                            <h3>Teologia Digital</h3>
                             <p>Para Criadores de Conteúdo</p>
                             <div class="ebook-stats">
                                 <span>📊 89 vendas</span>
@@ -225,6 +231,40 @@
                                 <span>⭐ 4.7/5</span>
                             </div>
                             <div class="ebook-price">R$ 54,90</div>
+                            <div class="ebook-actions">
+                                <button class="btn-small edit">✏️ Editar</button>
+                                <button class="btn-small delete">🗑️ Deletar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ebook-card-admin">
+                        <img src="https://via.placeholder.com/200x280/9C27B0/ffffff?text=Planilha" alt="Planilha">
+                        <div class="ebook-info">
+                            <h3>Planilha Financeira</h3>
+                            <p>Controle Financeiro</p>
+                            <div class="ebook-stats">
+                                <span>📊 56 vendas</span>
+                                <span>⭐ 4.9/5</span>
+                            </div>
+                            <div class="ebook-price">Especial</div>
+                            <div class="ebook-actions">
+                                <button class="btn-small edit">✏️ Editar</button>
+                                <button class="btn-small delete">🗑️ Deletar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ebook-card-admin">
+                        <img src="https://via.placeholder.com/200x280/FFD700/333333?text=Mentor" alt="Mentor">
+                        <div class="ebook-info">
+                            <h3>Mentor Milionário</h3>
+                            <p>Mapa da Prosperidade</p>
+                            <div class="ebook-stats">
+                                <span>📊 23 vendas</span>
+                                <span>⭐ 5.0/5</span>
+                            </div>
+                            <div class="ebook-price">Especial</div>
                             <div class="ebook-actions">
                                 <button class="btn-small edit">✏️ Editar</button>
                                 <button class="btn-small delete">🗑️ Deletar</button>
@@ -318,7 +358,7 @@
                     <tbody>
                         <tr>
                             <td>João Silva</td>
-                            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="610b0e000e21040c00080d4f020e0c">[email&#160;protected]</a></td>
+                            <td>joao@email.com</td>
                             <td>+55 24 99999-1111</td>
                             <td>3</td>
                             <td>R$ 149,70</td>
@@ -327,7 +367,7 @@
                         </tr>
                         <tr>
                             <td>Maria Santos</td>
-                            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0865697a6169486d65696164266b6765">[email&#160;protected]</a></td>
+                            <td>maria@email.com</td>
                             <td>+55 24 99999-2222</td>
                             <td>1</td>
                             <td>R$ 59,90</td>
@@ -336,7 +376,7 @@
                         </tr>
                         <tr>
                             <td>Pedro Costa</td>
-                            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="28584d4c5a47684d45494144064b4745">[email&#160;protected]</a></td>
+                            <td>pedro@email.com</td>
                             <td>+55 24 99999-3333</td>
                             <td>2</td>
                             <td>R$ 104,80</td>
@@ -410,4 +450,42 @@
                             <input type="checkbox" checked>
                             <label>Notificar de novas vendas</label>
                         </div>
-                        <div class="setting-item
+                        <div class="setting-item checkbox">
+                            <input type="checkbox" checked>
+                            <label>Notificar de novos clientes</label>
+                        </div>
+                        <div class="setting-item checkbox">
+                            <input type="checkbox">
+                            <label>Newsletter semanal</label>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>🔐 Segurança</h3>
+                        <div class="setting-item">
+                            <label>Alterar Senha</label>
+                            <button class="btn-secondary">Alterar</button>
+                        </div>
+                        <div class="setting-item">
+                            <label>Dois Fatores (2FA)</label>
+                            <button class="btn-secondary">Ativar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="dashboard.js"></script>
+    <script>
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                localStorage.removeItem('adminLoggedIn');
+                localStorage.removeItem('adminUser');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html>
