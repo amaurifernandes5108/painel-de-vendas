@@ -1,4 +1,4 @@
-const ADMIN_USER = "amauri fernandes";
+const ADMIN_USER = "amaurifernandes";
 const ADMIN_PASSWORD = "Adc26280403";
 
 document.addEventListener('DOMContentLoaded', function() {
